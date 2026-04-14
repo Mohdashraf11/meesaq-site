@@ -1,0 +1,261 @@
+/* ============================================================
+   MEESAQ AL AMANA — Blog Stylesheet
+   Extends css/style.css
+   ============================================================ */
+
+/* ── BLOG HERO ── */
+.blog-hero {
+  background: var(--dark);
+  padding: 120px 80px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+.blog-hero-inner { position: relative; z-index: 1; max-width: 780px; }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: #60a5fa; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.blog-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(26,86,219,0.2);
+  border: 1px solid rgba(26,86,219,0.4);
+  color: #93c5fd;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.blog-hero h1 {
+  font-size: clamp(26px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.blog-meta span { font-size: 13px; color: rgba(255,255,255,0.45); }
+.meta-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.25); border-radius: 50%; }
+
+/* ── ARTICLE LAYOUT ── */
+.article-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 80px 96px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── ARTICLE BODY ── */
+.article-body { min-width: 0; }
+.article-body h2 {
+  font-family: var(--font-head);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--dark);
+  margin: 52px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.article-body h2:first-child { margin-top: 0; }
+.article-body h3 {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 32px 0 10px;
+}
+.article-body p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.article-body ul {
+  list-style: none;
+  margin: 12px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.article-body ul li {
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.article-body ul li::before {
+  content: '→';
+  color: var(--blue);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.article-hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 44px 0;
+}
+
+/* Product card */
+.product-card {
+  border: 1px solid var(--border);
+  padding: 28px;
+  margin: 24px 0;
+  border-left: 3px solid var(--blue);
+  background: var(--bg-card);
+  transition: box-shadow 0.2s;
+}
+.product-card:hover { box-shadow: var(--shadow-md); }
+.product-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.product-card-icon {
+  width: 40px; height: 40px;
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.product-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+.product-card p { margin: 0; }
+
+/* Highlight box */
+.highlight-box {
+  background: rgba(219,234,254,0.6);
+  border-left: 4px solid var(--blue);
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.highlight-box p {
+  margin: 0;
+  color: var(--dark);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Article CTA */
+.article-cta {
+  background: var(--dark);
+  padding: 40px;
+  margin-top: 56px;
+  text-align: center;
+}
+.article-cta h3 {
+  font-family: var(--font-head);
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.article-cta p { color: rgba(255,255,255,0.55); max-width: 440px; margin: 0 auto 24px; }
+.article-cta .btn-primary { display: inline-flex; }
+
+/* ── SIDEBAR ── */
+.sidebar { position: sticky; top: 90px; }
+.sidebar-box {
+  border: 1px solid var(--border);
+  padding: 22px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+}
+.sidebar-box-title {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dark);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.toc-list a {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.toc-list a::before { content: '›'; color: var(--blue); font-weight: 700; }
+.toc-list a:hover { color: var(--blue); }
+
+.sidebar-cta-box {
+  background: var(--blue);
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.sidebar-cta-box p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.sidebar-cta-box a {
+  display: block;
+  padding: 10px 18px;
+  background: var(--dark);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.sidebar-cta-box a:hover { background: #0f2847; }
+
+.sidebar-links { display: flex; flex-direction: column; gap: 8px; }
+.sidebar-links a {
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.sidebar-links a:hover { color: var(--blue); }
+
+/* ── RESPONSIVE BLOG ── */
+@media (max-width: 1024px) {
+  .article-wrapper { padding: 48px 40px 80px; gap: 40px; }
+  .blog-hero { padding: 100px 40px 56px; }
+}
+@media (max-width: 768px) {
+  .blog-hero { padding: 88px 20px 48px; }
+  .article-wrapper { grid-template-columns: 1fr; padding: 40px 20px 64px; }
+  .sidebar { position: static; }
+}
