@@ -113,7 +113,7 @@ function handleSubmit(e) {
 
   /* If Formspree not configured yet — show mock success for local testing */
   const action = e.target.getAttribute('action') || '';
-  if (action.includes('YOUR_FORM_ID')) {
+  if (action.includes('xnjokrlq')) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.textContent = '✓ Requirement Submitted Successfully';
@@ -122,7 +122,7 @@ function handleSubmit(e) {
       btn.textContent = 'Submit Requirement';
       btn.style.background = '';
       e.target.reset();
-      if (charCount) { charCount.textContent = '0 / 20 characters minimum'; charCount.style.color = ''; }
+      if (charCount) { charCount.textContent = '0 / 15 characters minimum'; charCount.style.color = ''; }
       document.querySelectorAll('.valid,.invalid').forEach(el => el.classList.remove('valid','invalid'));
     }, 3500);
   }
