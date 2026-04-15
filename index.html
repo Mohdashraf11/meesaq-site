@@ -21,6 +21,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Meesaq Al Amana — UAE Procurement & Sourcing" />
   <meta name="twitter:description" content="Sourcing any product from UAE for global clients. Best price, quality verified, worldwide shipping." />
+  <link rel="preload" as="image" href="/meesaq-site/og-image.png">
 
   <!-- ── CANONICAL & FAVICON ── -->
   <link rel="canonical" href="https://meesaqalamana.com" />
@@ -284,8 +285,10 @@
             onsubmit="handleSubmit(event)"
             novalidate>
 
-        <input type="hidden" name="_next" value="?submitted=true" />
+        <input type="hidden" name="_next" value="https://mohdashraf11.github.io/meesaq-site/?submitted=true" />
         <input type="hidden" name="_subject" value="New Sourcing Requirement — Meesaq Al Amana" />
+
+        <input type="text" name="_gotcha" style="position:absolute;left:-9999px;">
 
         <div class="form-row">
           <div class="form-field">
@@ -418,10 +421,10 @@
 
         <div class="form-field">
           <label>Describe Your Requirement <span class="req">*</span></label>
-          <textarea name="requirement" id="requirementText" required minlength="20"
+          <textarea name="requirement" id="requirementText" required minlength="15"
             placeholder="Product name, brand/model, specifications, intended use, any details that help us source accurately..."></textarea>
-          <span class="field-error" id="err-requirement">Please describe your requirement (min. 20 characters).</span>
-          <span class="field-hint" id="char-count">0 / 20 characters minimum</span>
+          <span class="field-error" id="err-requirement">Please describe your requirement (min. 15 characters).</span>
+          <span class="field-hint" id="char-count">0 / 15 characters minimum</span>
         </div>
 
         <div class="form-field">

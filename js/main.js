@@ -34,7 +34,7 @@ function showError(id, el) {
   el.classList.remove('valid');
 }
 function clearError(id, el) {
-  const err = document.getElementById(id);
+  const err = document.getElementByIdb(id);
   if (err) err.classList.remove('show');
   el.classList.remove('invalid');
   el.classList.add('valid');
@@ -46,8 +46,8 @@ const charCount = document.getElementById('char-count');
 if (reqText && charCount) {
   reqText.addEventListener('input', () => {
     const len = reqText.value.length;
-    charCount.textContent = len + ' / 20 characters minimum';
-    charCount.style.color = len >= 20 ? 'var(--success)' : 'var(--text-muted)';
+    charCount.textContent = len + ' / 15 characters minimum';
+    charCount.style.color = len >= 15 ? 'var(--success)' : 'var(--text-muted)';
   });
 }
 
@@ -105,36 +105,31 @@ function handleSubmit(e) {
   if (dest && !dest.value) { showError('err-destination', dest); valid = false; }
   else if (dest) { clearError('err-destination', dest); }
 
-  if (reqText && (!reqText.value.trim() || reqText.value.trim().length < 20)) {
+  if (reqText && (!reqText.value.trim() || reqText.value.trim().length < 15)) {
     showError('err-requirement', reqText); valid = false;
   } else if (reqText) { clearError('err-requirement', reqText); }
 
   if (!valid) { e.preventDefault(); return; }
 
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  btn.textContent = "⏳ Submitting...";;
+
   /* If Formspree not configured yet — show mock success for local testing */
   const action = e.target.getAttribute('action') || '';
-  if (action.includes('xnjokrlq')) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = '✓ Requirement Submitted Successfully';
-    btn.style.background = '#059669';
-    setTimeout(() => {
-      btn.textContent = 'Submit Requirement';
-      btn.style.background = '';
-      e.target.reset();
-      if (charCount) { charCount.textContent = '0 / 15 characters minimum'; charCount.style.color = ''; }
-      document.querySelectorAll('.valid,.invalid').forEach(el => el.classList.remove('valid','invalid'));
-    }, 3500);
-  }
-  /* Real Formspree ID → form submits normally */
+  
 }
 
 /* ── SUCCESS ON RETURN FROM FORMSPREE ── */
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('submitted') === 'true') {
   const btn = document.getElementById('submitBtn');
+  const form = document.getElementById('contactForm');
+
   if (btn) {
     btn.textContent = '✓ Requirement Submitted Successfully';
     btn.style.background = '#059669';
   }
+
+  if (form) form.reset();
 }
