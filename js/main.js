@@ -34,7 +34,7 @@ function showError(id, el) {
   el.classList.remove('valid');
 }
 function clearError(id, el) {
-  const err = document.getElementByIdb(id);
+  const err = document.getElementById(id);
   if (err) err.classList.remove('show');
   el.classList.remove('invalid');
   el.classList.add('valid');
@@ -80,56 +80,81 @@ if (phoneInput) {
   });
 }
 
-/* ── FORM SUBMIT ── */
-function handleSubmit(e) {
+/* ── FORM SUBMIT (AJAX — no redirect, no Formspree page) ── */
+async function handleSubmit(e) {
+  e.preventDefault(); // Always prevent default — we handle everything here
+ 
   let valid = true;
-
+ 
   const name = e.target.querySelector('[name=name]');
   if (!name.value.trim() || name.value.trim().length < 2) {
     showError('err-name', name); valid = false;
   } else { clearError('err-name', name); }
-
+ 
   if (emailInput && !isValidEmail(emailInput.value)) {
     showError('err-email', emailInput); valid = false;
   } else if (emailInput) { clearError('err-email', emailInput); }
-
+ 
   if (phoneInput && !isValidPhone(phoneInput.value)) {
     showError('err-phone', phoneInput); valid = false;
   } else if (phoneInput) { clearError('err-phone', phoneInput); }
-
+ 
   const cat = document.getElementById('categorySelect');
   if (cat && !cat.value) { showError('err-category', cat); valid = false; }
   else if (cat) { clearError('err-category', cat); }
-
+ 
   const dest = document.getElementById('destinationSelect');
   if (dest && !dest.value) { showError('err-destination', dest); valid = false; }
   else if (dest) { clearError('err-destination', dest); }
-
+ 
   if (reqText && (!reqText.value.trim() || reqText.value.trim().length < 15)) {
     showError('err-requirement', reqText); valid = false;
   } else if (reqText) { clearError('err-requirement', reqText); }
-
-  if (!valid) { e.preventDefault(); return; }
-
+ 
+  if (!valid) return; // Stop here if any field is invalid
+ 
+  // Lock button while submitting
   const btn = document.getElementById('submitBtn');
-  btn.disabled = false;
-  btn.textContent = "⏳ Submitting...";;
-
-  /* If Formspree not configured yet — show mock success for local testing */
-  const action = e.target.getAttribute('action') || '';
-  
-}
-
-/* ── SUCCESS ON RETURN FROM FORMSPREE ── */
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('submitted') === 'true') {
-  const btn = document.getElementById('submitBtn');
-  const form = document.getElementById('contactForm');
-
-  if (btn) {
-    btn.textContent = '✓ Requirement Submitted Successfully';
-    btn.style.background = '#059669';
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+ 
+  try {
+    const response = await fetch(e.target.action, {
+      method: 'POST',
+      body: new FormData(e.target),
+      headers: { 'Accept': 'application/json' }
+    });
+ 
+    if (response.ok) {
+      // ✅ Success — show message, reset form, stay on page
+      btn.textContent = '✓ Requirement Submitted Successfully';
+      btn.style.background = '#059669';
+      e.target.reset();
+      if (charCount) {
+        charCount.textContent = '0 / 15 characters minimum';
+        charCount.style.color = '';
+      }
+      document.querySelectorAll('.valid, .invalid')
+        .forEach(el => el.classList.remove('valid', 'invalid'));
+ 
+      // Re-enable button after a few seconds so they can submit again if needed
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Submit Requirement →';
+        btn.style.background = '';
+      }, 5000);
+ 
+    } else {
+      // ❌ Formspree returned an error
+      throw new Error('Formspree error: ' + response.status);
+    }
+ 
+  } catch (err) {
+    // ❌ Network or server error
+    btn.disabled = false;
+    btn.textContent = 'Submit Requirement →';
+    btn.style.background = '';
+    alert('Something went wrong. Please try again or contact us on WhatsApp.');
+    console.error(err);
   }
-
-  if (form) form.reset();
 }
