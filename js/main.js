@@ -126,7 +126,6 @@ async function handleSubmit(e) {
     });
  
     if (response.ok) {
-      // ✅ Success — show message, reset form, stay on page
       btn.textContent = '✓ Requirement Submitted Successfully';
       btn.style.background = '#059669';
       e.target.reset();
