@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Home -->
   <url>
     <loc>https://meesaqalamana.com/</loc>
   </url>
 
-  <!-- Blog -->
   <url>
     <loc>https://meesaqalamana.com/blog/</loc>
   </url>
 
-  <!-- Products Main -->
   <url>
     <loc>https://meesaqalamana.com/products/</loc>
   </url>
 
-  <!-- Electrical Category -->
   <url>
     <loc>https://meesaqalamana.com/products/electrical/</loc>
   </url>
