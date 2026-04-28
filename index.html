@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <script>
+  if (location.hostname === "meesaqalamana.com") {
+    location.replace("https://www.meesaqalamana.com" + location.pathname + location.search);
+  }
+</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -73,7 +80,7 @@
 
 <!-- ══ NAVIGATION ══ -->
 <nav id="navbar">
-  <a href="/" class="nav-logo">
+  <a href="https://www.meesaqalamana.com/" class="nav-logo">
     <span class="logo-name">MEESAQ AL AMANA</span>
     <span class="logo-tag">UAE Procurement & Sourcing</span>
   </a>
@@ -81,7 +88,7 @@
     <li><a href="#how">Process</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#industries">Industries</a></li>
-    <li><a href="/blog/">Blog</a></li>
+    <li><a href="https://www.meesaqalamana.com/blog/">Blog</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Request a Quote</a>
 </nav>
