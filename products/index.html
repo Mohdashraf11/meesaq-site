@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Products We Source from UAE | Meesaq Al Amana</title>
-  <meta name="description" content="Browse products sourced from UAE by Meesaq Al Amana — PLC controllers, sensors, automotive parts, circuit boards, industrial tools, consumer goods and more. Request a quote for any product." />
+  <title>Products We Source for Businesses Worldwide | Meesaq Al Amana</title>
+  <meta name="description" content="Explore products sourced through our trusted supplier network, including strong UAE market expertise — industrial electronics, automotive parts, machinery, wholesale goods and more with global delivery." />
   <meta name="keywords" content="source PLC controller UAE, buy sensors UAE, automotive parts UAE wholesale, industrial electronics UAE, circuit boards UAE, procurement UAE products, Siemens parts UAE, ABB UAE, Schneider Electric UAE" />
   <meta name="author" content="Meesaq Al Amana" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Products We Source from UAE | Meesaq Al Amana" />
-  <meta property="og:description" content="Industrial electronics, automotive parts, machinery, consumer goods and more — sourced from UAE at the best price with worldwide shipping." />
+  <meta property="og:title" content="Products We Source for Businesses Worldwide | Meesaq Al Amana" />
+  <meta property="og:description" content="Industrial electronics, automotive parts, machinery and more — sourced with verified quality, competitive pricing, and global delivery." />
   <meta property="og:url" content="https://www.meesaqalamana.com/products/" />
   <meta property="og:site_name" content="Meesaq Al Amana" />
   <link rel="canonical" href="https://www.meesaqalamana.com/products/" />
@@ -44,15 +44,14 @@
   </script>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.meesaqalamana.com" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.meesaqalamana.com/blog/" },
-      { "@type": "ListItem", "position": 3, "name": "Products", "item": "https://www.meesaqalamana.com/products/" }
-    ]
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.meesaqalamana.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.meesaqalamana.com/products/" }
+      ]
+    }
   </script>
 
   <link rel="stylesheet" href="/css/style.css" />
@@ -61,7 +60,14 @@
     .products-page {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 110px 60px 96px;
+      padding: 40px 60px 96px;
+    }
+
+    /* ── HERO SECTION ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0b1f3a, #0f2c52);
+      padding: 60px 0;
+      color: #fff;
     }
 
     /* ── BREADCRUMB ── */
@@ -71,68 +77,142 @@
       gap: 8px;
       font-size: 12px;
       font-weight: 500;
-      color: var(--text-muted);
       margin-bottom: 32px;
     }
+
+    /* default (light pages) */
+    .breadcrumb { color: var(--text-muted); }
     .breadcrumb a { color: var(--blue); }
     .breadcrumb a:hover { text-decoration: underline; }
+
+    /* hero override */
+    .page-hero .breadcrumb {
+      color: rgba(255,255,255,0.7);
+    }
+    .page-hero .breadcrumb a {
+      color: #8ab4ff;
+    }
 
     /* ── PAGE HEADER ── */
     .page-title {
       font-size: clamp(26px, 4vw, 40px);
       font-weight: 700;
-      color: var(--dark);
       margin-bottom: 10px;
       letter-spacing: -0.01em;
     }
+
+    /* default */
+    .page-title { color: var(--dark); }
+
+    /* hero override */
+    .page-hero .page-title {
+      color: #fff;
+    }
+
     .page-sub {
       font-size: 15px;
-      color: var(--text-muted);
       line-height: 1.7;
       max-width: 600px;
       margin-bottom: 36px;
     }
 
-    /* ── SEARCH BAR ── */
+    /* default */
+    .page-sub { color: var(--text-muted); }
+
+    /* hero override */
+    .page-hero .page-sub {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .page-hero .page-sub a {
+      color: #4da3ff;
+    }
+
+/* ── SEARCH BAR ── */
     .search-wrap {
       position: relative;
       max-width: 480px;
       margin-bottom: 48px;
+      display: flex;
+      align-items: center; /* 🔥 ensures vertical alignment */
     }
+
+    /* INPUT */
     .search-wrap input {
       width: 100%;
-      padding: 12px 16px 12px 42px;
+      height: 44px;
+      padding: 0 16px 0 42px; /* space for icon */
       border: 1px solid var(--border);
       background: var(--bg-card);
       font-family: var(--font-body);
       font-size: 14px;
       color: var(--text);
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 6px;
+      transition: all 0.2s ease;
     }
+
+    /* FOCUS */
     .search-wrap input:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+      box-shadow: 0 0 0 2px rgba(26,86,219,0.2);
     }
-    .search-wrap input::placeholder { color: var(--text-muted); }
+
+    /* PLACEHOLDER */
+    .search-wrap input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* ICON */
     .search-icon {
       position: absolute;
-      left: 13px; top: 50%;
+      left: 14px;
+      top: 50%;
       transform: translateY(-50%);
       font-size: 16px;
       pointer-events: none;
       color: var(--text-muted);
     }
+
+    /* RESULT COUNT */
     #searchCount {
       font-size: 12px;
       color: var(--text-muted);
       margin-top: 8px;
     }
 
+    /* ── HERO VERSION (DARK BACKGROUND) ── */
+    .page-hero .search-wrap input {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .page-hero .search-wrap input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page-hero .search-wrap input:focus {
+      border-color: #4da3ff;
+      box-shadow: 0 0 0 2px rgba(77,163,255,0.3);
+    }
+
+    .page-hero .search-icon {
+      color: rgba(255,255,255,0.7);
+    }
+
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     /* ── CATEGORY SECTION ── */
     .category-section {
       margin-bottom: 48px;
     }
+
     .category-header {
       display: flex;
       align-items: center;
@@ -141,7 +221,11 @@
       background: var(--dark);
       margin-bottom: 2px;
     }
-    .category-icon { font-size: 18px; }
+
+    .category-icon {
+      font-size: 18px;
+    }
+
     .category-name {
       font-family: var(--font-head);
       font-size: 15px;
@@ -149,6 +233,7 @@
       color: white;
       letter-spacing: 0.03em;
     }
+
     .category-count {
       font-size: 11px;
       color: rgba(255,255,255,0.4);
@@ -160,6 +245,7 @@
       border: 1px solid var(--border);
       border-top: none;
     }
+
     .product-item {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -170,9 +256,18 @@
       background: var(--bg-card);
       transition: background 0.15s;
     }
-    .product-item:last-child { border-bottom: none; }
-    .product-item:hover { background: var(--bg-2); }
-    .product-item.hidden { display: none; }
+
+    .product-item:last-child {
+      border-bottom: none;
+    }
+
+    .product-item:hover {
+      background: var(--bg-2);
+    }
+
+    .product-item.hidden {
+      display: none;
+    }
 
     .product-name {
       font-size: 14px;
@@ -180,17 +275,20 @@
       color: var(--dark);
       margin-bottom: 4px;
     }
+
     .product-desc {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.6;
     }
+
     .product-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
       margin-top: 8px;
     }
+
     .product-tag {
       font-size: 10px;
       font-weight: 600;
@@ -201,9 +299,11 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
+
     .product-action {
       flex-shrink: 0;
     }
+
     .quote-btn {
       display: inline-block;
       padding: 7px 14px;
@@ -214,9 +314,12 @@
       white-space: nowrap;
       transition: background 0.2s;
     }
-    .quote-btn:hover { background: var(--blue-hover); }
 
-    /* No results */
+    .quote-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    /* ── NO RESULTS ── */
     .no-results {
       text-align: center;
       padding: 48px 20px;
@@ -224,7 +327,10 @@
       font-size: 15px;
       display: none;
     }
-    .no-results.show { display: block; }
+
+    .no-results.show {
+      display: block;
+    }
 
     /* ── CTA BANNER ── */
     .cta-banner {
@@ -237,20 +343,37 @@
       gap: 24px;
       flex-wrap: wrap;
     }
+
     .cta-banner h3 {
       font-size: 20px;
       color: white;
       margin-bottom: 6px;
     }
-    .cta-banner p { font-size: 14px; color: rgba(255,255,255,0.5); }
 
-    /* ── FOOTER OVERRIDE ── */
-    footer { margin-top: 0; }
+    .cta-banner p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
 
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 0;
+    }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .products-page { padding: 88px 20px 64px; }
-      .product-item { grid-template-columns: 1fr; }
-      .cta-banner { flex-direction: column; text-align: center; }
+      .products-page {
+        padding: 32px 20px 64px;
+      }
+
+      .product-item {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-banner {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -267,30 +390,41 @@
     <li><a href="/#services">Services</a></li>
     <li><a href="/#industries">Industries</a></li>
     <li><a href="/blog/">Blog</a></li>
+    <li><a href="/products/">Products</a></li>
   </ul>
   <a href="/#contact" class="nav-cta">Request a Quote</a>
 </nav>
 
+<section class="page-hero">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="https://www.meesaqalamana.com/">Home</a> ›
+      <span>Products</span>
+    </div>
+
+    <h1 class="page-title">Products We Source for Businesses Worldwide</h1>
+
+    <p class="page-sub">
+      We procure a wide range of products through our trusted supplier network,
+      including strong UAE market expertise for businesses worldwide.
+      Can't find what you need?
+      <a href="/#contact" style="color:#4da3ff;">Submit a custom requirement →</a>
+    </p>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="productSearch"
+        placeholder="Search products .." autocomplete="off" />
+      <div id="searchCount"></div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══ PRODUCTS PAGE ══ -->
 <main class="products-page">
-
-  <div class="breadcrumb">
-    <a href="https://www.meesaqalamana.com/">Home</a> ›
-    <span>Products</span>
-  </div>
-
-  <h1 class="page-title">Products We Source from UAE</h1>
-  <p class="page-sub">
-    We procure a wide range of products from verified UAE suppliers for businesses worldwide.
-    Can't find what you need? <a href="/#contact" style="color:var(--blue)">Submit a custom requirement →</a>
-  </p>
-
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="productSearch" placeholder="Search products (e.g. PLC, sensor, filter...)" autocomplete="off" />
-    <div id="searchCount"></div>
-  </div>
 
   <div id="productContainer">
 
