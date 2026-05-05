@@ -156,4 +156,28 @@ async function handleSubmit(e) {
     alert('Something went wrong. Please try again or contact us on WhatsApp.');
     console.error(err);
   }
+
 }
+
+const burger = document.querySelector('.nav-burger');
+const navLinks = document.querySelector('.nav-links');
+
+burger?.addEventListener('click', function () {
+  const isOpen = navLinks.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded', false);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.contact-form');
+
+  if (form) {
+    form.addEventListener('submit', handleSubmit);
+  }
+});

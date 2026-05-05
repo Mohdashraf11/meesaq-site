@@ -131,10 +131,54 @@ nav {
   justify-content: space-between;
   transition: background 0.3s, box-shadow 0.3s;
 }
+.nav-burger {
+  display: none;
+}
 nav.scrolled {
   background: var(--bg-2);
   box-shadow: var(--shadow-md);
 }
+/* DEFAULT (hero section) */
+.logo-light {
+  display: block !important;
+}
+
+.logo-dark {
+  display: none !important;
+}
+
+/* AFTER SCROLL */
+nav.scrolled .logo-light {
+  display: none !important;
+}
+
+nav.scrolled .logo-dark {
+  display: block !important;
+}
+
+.logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+   flex-shrink: 0;
+  display: block;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+}
+.logo-icon {
+  height: 32px;
+  width: auto;
+}
+
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 700;
+  color: inherit;
+}
+
 .nav-logo { display: flex; flex-direction: column; line-height: 1; }
 .nav-logo .logo-name {
   font-family: var(--font-head);
@@ -806,8 +850,19 @@ footer {
   transition: transform 0.2s;
   animation: waPulse 2.5s infinite;
 }
+
+.mobile-cta {
+  display: none;
+}
+
 .wa-btn:hover { transform: scale(1.08); }
 .wa-btn svg { width: 28px; height: 28px; fill: white; }
+
+@media (max-width: 768px) {
+  .logo {
+    height: 34px;
+  }
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -849,4 +904,67 @@ footer {
   footer { padding: 48px 20px 28px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 768px) {
+
+  /* hide desktop CTA */
+  .nav-cta {
+    display: none;
+  }
+
+  /* burger */
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  .nav-burger span {
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+  }
+
+  nav.scrolled .nav-burger span {
+    background: var(--dark);
+  }
+
+  /* menu hidden */
+  .nav-links {
+    display: none;
+  }
+
+  /* menu open */
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--dark-2);
+    padding: 40px 20px;
+    gap: 24px;
+    z-index: 100;
+  }
+
+  .nav-links a {
+    font-size: 18px;
+    color: white;
+  }
+
+  .mobile-cta a {
+    display: block;
+    background: var(--blue);
+    padding: 12px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+  }
 }
