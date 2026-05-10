@@ -1,183 +1,405 @@
-/* ============================================================
-   MEESAQ AL AMANA — Main JavaScript
-   ============================================================ */
 
-/* ── NAV SCROLL ── */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-/* ── SCROLL REVEAL ── */
-const reveals = document.querySelectorAll('.reveal');
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 70);
-      revealObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-reveals.forEach(el => revealObs.observe(el));
+  /* ── NAV SCROLL ── */
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
 
-/* ── VALIDATION HELPERS ── */
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
-}
-function isValidPhone(phone) {
-  return /^[0-9\s\-]{6,15}$/.test(phone.trim());
-}
-function showError(id, el) {
-  const err = document.getElementById(id);
-  if (err) err.classList.add('show');
-  el.classList.add('invalid');
-  el.classList.remove('valid');
-}
-function clearError(id, el) {
-  const err = document.getElementById(id);
-  if (err) err.classList.remove('show');
-  el.classList.remove('invalid');
-  el.classList.add('valid');
-}
 
-/* ── CHARACTER COUNT ── */
-const reqText   = document.getElementById('requirementText');
-const charCount = document.getElementById('char-count');
-if (reqText && charCount) {
-  reqText.addEventListener('input', () => {
-    const len = reqText.value.length;
-    charCount.textContent = len + ' / 15 characters minimum';
-    charCount.style.color = len >= 15 ? 'var(--success)' : 'var(--text-muted)';
-  });
-}
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  if (reveals.length) {
 
-/* ── LIVE EMAIL VALIDATION ── */
-const emailInput = document.getElementById('emailInput');
-if (emailInput) {
-  emailInput.addEventListener('blur', () => {
-    if (!emailInput.value) return;
-    isValidEmail(emailInput.value)
-      ? clearError('err-email', emailInput)
-      : showError('err-email', emailInput);
-  });
-  emailInput.addEventListener('input', () => {
-    if (emailInput.classList.contains('invalid') && isValidEmail(emailInput.value))
-      clearError('err-email', emailInput);
-  });
-}
+    const revealObs = new IntersectionObserver((entries) => {
 
-/* ── PHONE — DIGITS ONLY ── */
-const phoneInput = document.getElementById('phoneInput');
-if (phoneInput) {
-  phoneInput.addEventListener('input', () => {
-    phoneInput.value = phoneInput.value.replace(/[^0-9\s\-]/g, '');
-  });
-  phoneInput.addEventListener('blur', () => {
-    if (!phoneInput.value) return;
-    isValidPhone(phoneInput.value)
-      ? clearError('err-phone', phoneInput)
-      : showError('err-phone', phoneInput);
-  });
-}
+      entries.forEach((entry, i) => {
 
-/* ── FORM SUBMIT (AJAX — no redirect, no Formspree page) ── */
-async function handleSubmit(e) {
-  e.preventDefault(); // Always prevent default — we handle everything here
- 
-  let valid = true;
- 
-  const name = e.target.querySelector('[name=name]');
-  if (!name.value.trim() || name.value.trim().length < 2) {
-    showError('err-name', name); valid = false;
-  } else { clearError('err-name', name); }
- 
-  if (emailInput && !isValidEmail(emailInput.value)) {
-    showError('err-email', emailInput); valid = false;
-  } else if (emailInput) { clearError('err-email', emailInput); }
- 
-  if (phoneInput && !isValidPhone(phoneInput.value)) {
-    showError('err-phone', phoneInput); valid = false;
-  } else if (phoneInput) { clearError('err-phone', phoneInput); }
- 
-  const cat = document.getElementById('categorySelect');
-  if (cat && !cat.value) { showError('err-category', cat); valid = false; }
-  else if (cat) { clearError('err-category', cat); }
- 
-  const dest = document.getElementById('destinationSelect');
-  if (dest && !dest.value) { showError('err-destination', dest); valid = false; }
-  else if (dest) { clearError('err-destination', dest); }
- 
-  if (reqText && (!reqText.value.trim() || reqText.value.trim().length < 15)) {
-    showError('err-requirement', reqText); valid = false;
-  } else if (reqText) { clearError('err-requirement', reqText); }
- 
-  if (!valid) return; // Stop here if any field is invalid
- 
-  // Lock button while submitting
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Submitting...';
- 
-  try {
-    const response = await fetch(e.target.action, {
-      method: 'POST',
-      body: new FormData(e.target),
-      headers: { 'Accept': 'application/json' }
+        if (entry.isIntersecting) {
+
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 70);
+
+          revealObs.unobserve(entry.target);
+
+        }
+
+      });
+
+    }, {
+      threshold: 0.1
     });
- 
-    if (response.ok) {
-      btn.textContent = '✓ Requirement Submitted Successfully';
-      btn.style.background = '#059669';
-      e.target.reset();
-      if (charCount) {
-        charCount.textContent = '0 / 15 characters minimum';
-        charCount.style.color = '';
-      }
-      document.querySelectorAll('.valid, .invalid')
-        .forEach(el => el.classList.remove('valid', 'invalid'));
- 
-      // Re-enable button after a few seconds so they can submit again if needed
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'Submit Requirement →';
-        btn.style.background = '';
-      }, 5000);
- 
-    } else {
-      // ❌ Formspree returned an error
-      throw new Error('Formspree error: ' + response.status);
+
+    reveals.forEach(el => revealObs.observe(el));
+
+  }
+
+
+  /* ── VALIDATION HELPERS ── */
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+  }
+
+  function isValidPhone(phone) {
+    return /^[0-9\s\-]{6,15}$/.test(phone.trim());
+  }
+
+  function showError(id, el) {
+
+    if (!el) return;
+
+    const err = document.getElementById(id);
+
+    if (err) {
+      err.classList.add('show');
     }
- 
-  } catch (err) {
-    // ❌ Network or server error
+
+    el.classList.add('invalid');
+    el.classList.remove('valid');
+
+  }
+
+  function clearError(id, el) {
+
+    if (!el) return;
+
+    const err = document.getElementById(id);
+
+    if (err) {
+      err.classList.remove('show');
+    }
+
+    el.classList.remove('invalid');
+    el.classList.add('valid');
+
+  }
+
+
+  /* ── FORM ELEMENTS ── */
+  const reqText = document.getElementById('requirementText');
+  const charCount = document.getElementById('char-count');
+  const emailInput = document.getElementById('emailInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const contactForm = document.querySelector('.contact-form');
+
+
+  /* ── CHARACTER COUNT ── */
+  if (reqText && charCount) {
+
+    reqText.addEventListener('input', () => {
+
+      const len = reqText.value.length;
+
+      charCount.textContent =
+        `${len} / 15 characters minimum`;
+
+      charCount.style.color =
+        len >= 15
+          ? 'var(--success)'
+          : 'var(--text-muted)';
+
+    });
+
+  }
+
+
+  /* ── LIVE EMAIL VALIDATION ── */
+  if (emailInput) {
+
+    emailInput.addEventListener('blur', () => {
+
+      if (!emailInput.value) return;
+
+      isValidEmail(emailInput.value)
+        ? clearError('err-email', emailInput)
+        : showError('err-email', emailInput);
+
+    });
+
+
+    emailInput.addEventListener('input', () => {
+
+      if (
+        emailInput.classList.contains('invalid') &&
+        isValidEmail(emailInput.value)
+      ) {
+        clearError('err-email', emailInput);
+      }
+
+    });
+
+  }
+
+
+  /* ── PHONE VALIDATION ── */
+  if (phoneInput) {
+
+    phoneInput.addEventListener('input', () => {
+
+      phoneInput.value =
+        phoneInput.value.replace(/[^0-9\s\-]/g, '');
+
+    });
+
+
+    phoneInput.addEventListener('blur', () => {
+
+      if (!phoneInput.value) return;
+
+      isValidPhone(phoneInput.value)
+        ? clearError('err-phone', phoneInput)
+        : showError('err-phone', phoneInput);
+
+    });
+
+  }
+
+
+  /* ── BUTTON RESET HELPER ── */
+  function resetButton(btn) {
+
+    if (!btn) return;
+
     btn.disabled = false;
     btn.textContent = 'Submit Requirement →';
     btn.style.background = '';
-    alert('Something went wrong. Please try again or contact us on WhatsApp.');
-    console.error(err);
+
   }
 
-}
 
-const burger = document.querySelector('.nav-burger');
-const navLinks = document.querySelector('.nav-links');
+  /* ── FORM SUBMIT ── */
+  async function handleSubmit(e) {
 
-burger?.addEventListener('click', function () {
-  const isOpen = navLinks.classList.toggle('open');
-  this.setAttribute('aria-expanded', isOpen);
-});
+    e.preventDefault();
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    burger.setAttribute('aria-expanded', false);
+    let valid = true;
+
+
+    const name =
+      e.target.querySelector('[name=name]');
+
+    if (!name) return;
+
+
+    if (
+      !name.value.trim() ||
+      name.value.trim().length < 2
+    ) {
+
+      showError('err-name', name);
+      valid = false;
+
+    } else {
+
+      clearError('err-name', name);
+
+    }
+
+
+    if (
+      emailInput &&
+      !isValidEmail(emailInput.value)
+    ) {
+
+      showError('err-email', emailInput);
+      valid = false;
+
+    } else if (emailInput) {
+
+      clearError('err-email', emailInput);
+
+    }
+
+
+    if (
+      phoneInput &&
+      !isValidPhone(phoneInput.value)
+    ) {
+
+      showError('err-phone', phoneInput);
+      valid = false;
+
+    } else if (phoneInput) {
+
+      clearError('err-phone', phoneInput);
+
+    }
+
+
+    const cat =
+      document.getElementById('categorySelect');
+
+    if (cat && !cat.value) {
+
+      showError('err-category', cat);
+      valid = false;
+
+    } else if (cat) {
+
+      clearError('err-category', cat);
+
+    }
+
+
+    const dest =
+      document.getElementById('destinationSelect');
+
+    if (dest && !dest.value) {
+
+      showError('err-destination', dest);
+      valid = false;
+
+    } else if (dest) {
+
+      clearError('err-destination', dest);
+
+    }
+
+
+    if (
+      reqText &&
+      (
+        !reqText.value.trim() ||
+        reqText.value.trim().length < 15
+      )
+    ) {
+
+      showError('err-requirement', reqText);
+      valid = false;
+
+    } else if (reqText) {
+
+      clearError('err-requirement', reqText);
+
+    }
+
+
+    if (!valid) return;
+
+
+    const btn =
+      document.getElementById('submitBtn');
+
+    if (!btn) return;
+
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+
+
+    try {
+
+      const response = await fetch(e.target.action, {
+
+        method: 'POST',
+
+        body: new FormData(e.target),
+
+        headers: {
+          'Accept': 'application/json'
+        }
+
+      });
+
+
+      if (response.ok) {
+
+        btn.textContent =
+          '✓ Requirement Submitted Successfully';
+
+        btn.style.background = '#059669';
+
+
+        e.target.reset();
+
+
+        if (charCount) {
+
+          charCount.textContent =
+            '0 / 15 characters minimum';
+
+          charCount.style.color = '';
+
+        }
+
+
+        document
+          .querySelectorAll('.valid, .invalid')
+          .forEach(el => {
+            el.classList.remove('valid', 'invalid');
+          });
+
+
+        setTimeout(() => {
+          resetButton(btn);
+        }, 5000);
+
+
+      } else {
+
+        throw new Error(
+          'Formspree error: ' + response.status
+        );
+
+      }
+
+
+    } catch (err) {
+
+      resetButton(btn);
+
+      alert(
+        'Something went wrong. Please try again or contact us on WhatsApp.'
+      );
+
+      console.error(err);
+
+    }
+
+  }
+
+
+  /* ── MOBILE MENU ── */
+  const burger = document.querySelector('.nav-burger');
+  const navLinks = document.querySelector('.nav-links');
+
+
+  burger?.addEventListener('click', function () {
+
+    if (!navLinks) return;
+
+    const isOpen =
+      navLinks.classList.toggle('open');
+
+    this.setAttribute('aria-expanded', isOpen);
+
   });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.contact-form');
 
-  if (form) {
-    form.addEventListener('submit', handleSubmit);
+  document.querySelectorAll('.nav-links a').forEach(link => {
+
+    link.addEventListener('click', () => {
+
+      if (navLinks) {
+        navLinks.classList.remove('open');
+      }
+
+      if (burger) {
+        burger.setAttribute('aria-expanded', false);
+      }
+
+    });
+
+  });
+
+
+  /* ── CONTACT FORM ── */
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleSubmit);
   }
+
 });
