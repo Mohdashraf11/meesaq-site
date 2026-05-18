@@ -246,5 +246,4 @@ For business inquiries and sourcing services, visit:
 
 # License
 
-This project is licensed under the MIT License.
-mmmmm
+© Meesaq Al Amana. All rights reserved.
